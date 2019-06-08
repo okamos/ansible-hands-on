@@ -1,0 +1,16 @@
+- name: Build server
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars:
+    ec2:
+      ami_id: ami-09c81ecf1c2b2ef70 # ubuntu 18.04
+      vpc_subnets: default-c
+      group:
+        - ssh_servers
+      instance_tags:
+        Name: "ansible-hands-on"
+      instance_type: t3.nano
+      key_name: samurai_20180611
+  roles:
+    - { role: '../roles/ec2' }

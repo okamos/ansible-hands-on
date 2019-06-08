@@ -1,0 +1,11 @@
+[defaults]
+# sshで接続するための鍵を記述します
+private_key_file=~/.ssh/YOUR_KEY
+# インベントリファイルを記述します。通常はAWS EC2から情報を取得して使うので変更不要です
+inventory=./ec2.py
+# vaultのパスワードが記載されたファイルを記述します。内容はメンバー間で共有します
+#  vault_password_file=./.vault_password_file
+# include_tasksを使う時などにrolesディレクトリを指定していないとserversから相対的に見にいってしまうため
+roles_path=./roles
+# 新しいサーバに接続する際に信頼性の確認を行うのがウザい人向け、インベントリで変なサーバに繋がないようにしてください
+host_key_checking=False
