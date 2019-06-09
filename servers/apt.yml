@@ -1,0 +1,6 @@
+- name: Sample server
+  hosts: "tag_Name_ansible_hands_on"
+  remote_user: ubuntu
+  become: yes
+  roles:
+    - { role: '../roles/apt_sample' }
