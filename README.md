@@ -10,3 +10,8 @@ ansible -i inventories/echo_sample.txt default -u ubuntu -m shell -a 'echo "YOUR
 
 ansible-playbook -i inventories/ec2.py servers/apt.yml
 ```
+
+## 03
+```
+ansible-playbook -i inventories/ec2.py servers/nginx.yml
+```

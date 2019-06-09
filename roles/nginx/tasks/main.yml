@@ -1,0 +1,50 @@
+- name: Nginx Install dependencies
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+  vars:
+    packages:
+    - libssl-dev
+    - zlib1g-dev
+    - libpcre3
+    - libpcre3-dev
+    - gcc
+    - make
+    - unzip
+
+- name: Nginx Download source
+  get_url:
+    url: "{{ nginx_tarball_url }}"
+    dest: "/tmp/nginx-{{ nginx_version }}.tar.gz"
+  register: nginx_source
+
+- name: Nginx unpack source
+  unarchive:
+    copy: no
+    dest: /tmp/
+    src: "{{ nginx_source.dest }}"
+  when: nginx_source.changed
+  register: nginx_source_unpack
+
+- name: Nginx Create required Nginx dirs
+  file:
+    path: /etc/nginx
+    state: directory
+    owner: root
+    mode: 0755
+
+- name: Nginx Send service file
+  template:
+    src: nginx.service
+    dest: /etc/systemd/system
+    mode: 0755
+
+- name: Nginx Configure source
+  shell: "./configure --sbin-path={{ nginx_bin }} && make && make install"
+  args:
+    chdir: "/tmp/nginx-{{ nginx_version }}"
+  when: nginx_source_unpack.changed
+  register: nginx_configure
+  notify: Nginx restart

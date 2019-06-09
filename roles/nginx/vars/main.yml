@@ -1,0 +1,3 @@
+nginx_version: 1.16.0
+nginx_tarball_url: "http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz"
+nginx_bin: /usr/sbin/nginx
