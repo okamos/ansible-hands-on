@@ -15,3 +15,10 @@ ansible-playbook -i inventories/ec2.py servers/apt.yml
 ```
 ansible-playbook -i inventories/ec2.py servers/nginx.yml
 ```
+
+## 04
+```
+ansible-vault create vaults/YOUR_FILE.yml
+ansible-vault edit vaults/YOUR_FILE.yml
+ansible-vault view vaults/YOUR_FILE.yml
+```
